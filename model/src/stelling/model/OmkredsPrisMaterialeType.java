@@ -4,7 +4,7 @@ package stelling.model;
  * Repr¾senterer en materialetype, hvis pris udregnes iht. opgavens
  * omkredsm¾ssige omfang
  */
-public class OmkredsPrisMaterialeType extends MaterialeType {
+class OmkredsPrisMaterialeType extends MaterialeType {
 	OmkredsPrisMaterialeType(String typeNavn) {
 		super(typeNavn);
 	}

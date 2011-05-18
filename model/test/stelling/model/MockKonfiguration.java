@@ -9,13 +9,21 @@ class MockKonfiguration implements ISessionKonfiguration {
 	private final OpgaveType defaultOpgaveType;
 
 	MockKonfiguration() {
-		MaterialeType tilpasseligRammeType = new OmkredsPrisMaterialeType(
-				"Tilpasselig Ramme");
-		MaterialeType faerdigRammeType = new OmkredsPrisMaterialeType(
-				"F¾rdigramme");
-		MaterialeType glasType = new ArealPrisMaterialeType("Glas");
-		MaterialeType bagpapType = new ArealPrisMaterialeType("Bagpap");
-		MaterialeType baggrundType = new ArealPrisMaterialeType("Baggrund");
+		MaterialeType tilpasseligRammeType = lavMaterialeType(
+				MaterialeTypeEnum.OMKREDS_PRIS, "Tilpasselig Ramme",
+				new String[] { "navn", "pris", "materiale", "farve", "id",
+						"placering" });
+		MaterialeType faerdigRammeType = lavMaterialeType(
+				MaterialeTypeEnum.OMKREDS_PRIS, "F¾rdigramme", new String[] {
+						"navn", "pris", "materiale", "farve", "id" });
+		MaterialeType glasType = lavMaterialeType(MaterialeTypeEnum.AREAL_PRIS,
+				"Glas", new String[] { "navn", "pris" });
+		MaterialeType bagpapType = lavMaterialeType(
+				MaterialeTypeEnum.AREAL_PRIS, "Bagpap", new String[] { "navn",
+						"pris" });
+		MaterialeType baggrundType = lavMaterialeType(
+				MaterialeTypeEnum.AREAL_PRIS, "Baggrund", new String[] {
+						"navn", "pris" });
 		OpgaveType tilpassetIndramning = new OpgaveType("Tilpasset Indramning",
 				Arrays.asList(new IOpgaveAttributType[] { tilpasseligRammeType,
 						glasType, bagpapType, baggrundType }));
@@ -37,8 +45,10 @@ class MockKonfiguration implements ISessionKonfiguration {
 		return defaultOpgaveType;
 	}
 
-	private MaterialeType lavMaterialeType(String navn, String[] feltNavne) {
-		// TODO: Implement
-		return null;
+	private MaterialeType lavMaterialeType(MaterialeTypeEnum materialeTypeType,
+			String navn, String[] feltNavne) {
+		MaterialeType type = materialeTypeType.nyMaterialeType(navn);
+		type.setFeltNavne(Arrays.asList(feltNavne));
+		return type;
 	}
 }

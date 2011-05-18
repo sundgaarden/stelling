@@ -29,7 +29,12 @@ abstract class MaterialeType implements IOpgaveAttributType {
 		feltNavne = new ArrayList<String>();
 		materialer = new ArrayList<Materiale>();
 		nil = new Materiale(this, "Ingen", Beloeb.NUL);
+		initDefaultMaterialer();
+	}
+
+	private void initDefaultMaterialer() {
 		defaultVaerdi = nil;
+		materialer.clear();
 		materialer.add(nil);
 	}
 
@@ -41,6 +46,21 @@ abstract class MaterialeType implements IOpgaveAttributType {
 	@Override
 	public List<String> feltNavne() {
 		return Collections.unmodifiableList(feltNavne);
+	}
+
+	/**
+	 * Ændrer sættet af feltnavne understøttet af denne materialetype
+	 * <p>
+	 * Obs: Kald til denne metode fjerner alle eksisterende materialer af denne
+	 * type
+	 * 
+	 * @param inFeltNavne
+	 *            Navne på ny felter som denne materialetype skal understøtte
+	 */
+	public void setFeltNavne(List<String> inFeltNavne) {
+		feltNavne.clear();
+		feltNavne.addAll(inFeltNavne);
+		initDefaultMaterialer();
 	}
 
 	/**

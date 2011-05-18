@@ -4,7 +4,7 @@ package stelling.model;
  * Repr¾senterer en materialetype, hvis pris er uafh¾ngig af opgavens
  * st¿rrelsesm¾ssige omfang
  */
-public class FastPrisMaterialeType extends MaterialeType {
+class FastPrisMaterialeType extends MaterialeType {
 	FastPrisMaterialeType(String typeNavn) {
 		super(typeNavn);
 	}

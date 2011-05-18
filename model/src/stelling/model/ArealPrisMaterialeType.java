@@ -4,7 +4,7 @@ package stelling.model;
  * Repr¾senterer en materialetype, hvis pris udregnes iht. opgavens arealm¾ssige
  * omfang
  */
-public class ArealPrisMaterialeType extends MaterialeType {
+class ArealPrisMaterialeType extends MaterialeType {
 	ArealPrisMaterialeType(String typeNavn) {
 		super(typeNavn);
 	}
