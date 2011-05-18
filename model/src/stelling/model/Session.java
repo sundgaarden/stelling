@@ -24,11 +24,20 @@ public class Session {
 	}
 
 	/**
-	 * Returnerer de af sessionen underst¿ttede opgavetyper sorteret efter navn
+	 * Returnerer den opgavetype der bruges som default
+	 * 
+	 * @return Default opgavetype
+	 */
+	public OpgaveType defaultOpgaveType() {
+		return defaultOpgaveType;
+	}
+
+	/**
+	 * Returnerer de underst¿ttede opgavetyper sorteret efter navn
 	 * 
 	 * @return Opgavetyper sorteret efter navn
 	 */
-	public List<OpgaveType> opgaveTyper() {
+	List<OpgaveType> opgaveTyper() {
 		return Collections.unmodifiableList(opgaveTyper);
 	}
 
@@ -47,8 +56,7 @@ public class Session {
 	 * @return Ny foresp¿rgsel
 	 */
 	public Forespoergsel nyForespoergsel() {
-		Forespoergsel forespoergsel = new Forespoergsel();
-		forespoergsel.tilfoejOpgave(defaultOpgaveType.nyOpgave());
+		Forespoergsel forespoergsel = new Forespoergsel(this);
 		forespoergsler.add(forespoergsel);
 		return forespoergsel;
 	}

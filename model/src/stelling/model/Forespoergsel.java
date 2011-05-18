@@ -8,13 +8,25 @@ import java.util.List;
  * Repræsenterer en forespørgsel på et sæt af opgaver
  */
 public class Forespoergsel implements IBeskrivelig {
+	private final Session session;
 	private final List<Opgave> opgaver;
 
 	/**
-	 * Kreerer ny forespørgsel
+	 * Kreerer ny forespørgsel med en default opgave
 	 */
-	public Forespoergsel() {
+	Forespoergsel(Session inSession) {
 		opgaver = new ArrayList<Opgave>();
+		session = inSession;
+		nyOpgave(session.defaultOpgaveType());
+	}
+
+	/**
+	 * Returnerer de understøttede opgavetyper sorteret efter navn
+	 * 
+	 * @return Opgavetyper sorteret efter navn
+	 */
+	public List<OpgaveType> opgaveTyper() {
+		return session.opgaveTyper();
 	}
 
 	/**
@@ -43,12 +55,15 @@ public class Forespoergsel implements IBeskrivelig {
 	}
 
 	/**
-	 * Tilføjer den specificerede opgave til forespørgslen
+	 * Tilføjer en ny opgave til forespørgslen af den specificerede type
 	 * 
-	 * @param opgave
-	 *            Opgave der skal tilføjes
+	 * @param opgaveType
+	 *            Type af den nye opgave
+	 * @return Ny opgave af den specificerede type
 	 */
-	public void tilfoejOpgave(Opgave opgave) {
+	public Opgave nyOpgave(OpgaveType opgaveType) {
+		Opgave opgave = opgaveType.nyOpgave();
 		opgaver.add(opgave);
+		return opgave;
 	}
 }
