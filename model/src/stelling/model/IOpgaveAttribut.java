@@ -32,4 +32,13 @@ public interface IOpgaveAttribut {
 	 * @return Navnet pŒ denne attribut
 	 */
 	public String navn();
+
+	/**
+	 * Returnerer v¾rdien i det specificerede felt for denne attribut
+	 * 
+	 * @param feltNavn
+	 *            Navn pŒ det felt hvis v¾rdi skal returneres
+	 * @return V¾rdi i det specificerede felt
+	 */
+	public String feltVaerdi(String feltNavn);
 }

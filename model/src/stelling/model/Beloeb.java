@@ -61,4 +61,18 @@ public class Beloeb {
 	public String toString() {
 		return new DecimalFormat("0.00").format(vaerdi);
 	}
+
+	/**
+	 * Returnerer en instans af Beloeb med den specificerede værdi.
+	 * <p>
+	 * Hvis den angivne streng ikke repræsenterer et tal, returneres Beloeb.NUL
+	 * 
+	 * @param tekst
+	 *            Talværdi på strengform
+	 * @return Den specificerede værdi repræsenteret som et Beloeb
+	 */
+	public static Beloeb parse(String tekst) {
+		double vaerdi = Double.parseDouble(tekst);
+		return vaerdi == 0 ? NUL : new Beloeb(vaerdi);
+	}
 }
