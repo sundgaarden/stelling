@@ -1,6 +1,5 @@
 package stelling.model;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**

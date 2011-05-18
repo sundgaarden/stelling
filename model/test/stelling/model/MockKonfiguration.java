@@ -36,4 +36,9 @@ class MockKonfiguration implements ISessionKonfiguration {
 	public OpgaveType defaultOpgaveType() {
 		return defaultOpgaveType;
 	}
+
+	private MaterialeType lavMaterialeType(String navn, String[] feltNavne) {
+		// TODO: Implement
+		return null;
+	}
 }

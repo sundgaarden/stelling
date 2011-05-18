@@ -13,6 +13,7 @@ import java.util.List;
  */
 abstract class MaterialeType implements IOpgaveAttributType {
 	private final String navn;
+	private final List<String> feltNavne;
 	private final List<Materiale> materialer;
 	private final Materiale nil;
 	private Materiale defaultVaerdi;
@@ -25,20 +26,21 @@ abstract class MaterialeType implements IOpgaveAttributType {
 	 */
 	MaterialeType(String typeNavn) {
 		navn = typeNavn;
+		feltNavne = new ArrayList<String>();
 		materialer = new ArrayList<Materiale>();
 		nil = new Materiale(this, "Ingen", Beloeb.NUL);
 		defaultVaerdi = nil;
 		materialer.add(nil);
 	}
 
-	/**
-	 * Returnerer navnet på denne materialetype
-	 * 
-	 * @return Navnet på denne materialetype
-	 */
 	@Override
 	public String navn() {
 		return navn;
+	}
+
+	@Override
+	public List<String> feltNavne() {
+		return Collections.unmodifiableList(feltNavne);
 	}
 
 	/**
@@ -66,7 +68,7 @@ abstract class MaterialeType implements IOpgaveAttributType {
 			throw new IllegalArgumentException(
 					"Den specificerede default værdi var af en forkert type.");
 		}
-		this.defaultVaerdi = defaultVaerdi;
+		defaultVaerdi = inDefaultVaerdi;
 	}
 
 	/**
