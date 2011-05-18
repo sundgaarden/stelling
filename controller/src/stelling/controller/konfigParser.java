@@ -19,7 +19,7 @@ public class konfigParser {
  * 
  */
 
-public File[] getKonfigFiler() throws FileNotFoundException{ 
+private File[] getKonfigFiler() throws FileNotFoundException{ 
 	//sti til executable jar fil hentes
 	new File(System.getProperty("java.class.path"));
 	//sti til konfig filer angives
