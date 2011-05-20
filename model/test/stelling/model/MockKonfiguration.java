@@ -10,26 +10,21 @@ class MockKonfiguration implements ISessionKonfiguration {
 
 	MockKonfiguration() {
 		MaterialeType tilpasseligRammeType = lavMaterialeType(
-				MaterialeTypeEnum.OMKREDS_PRIS, "Tilpasselig Ramme",
-				new String[] { "navn", "pris", "materiale", "farve", "id",
-						"placering" });
+				MaterialeTypeEnum.OMKREDS_PRIS, "Tilpasselig Ramme", "navn",
+				"pris", "materiale", "farve", "id", "placering");
 		MaterialeType faerdigRammeType = lavMaterialeType(
-				MaterialeTypeEnum.OMKREDS_PRIS, "F¾rdigramme", new String[] {
-						"navn", "pris", "materiale", "farve", "id" });
+				MaterialeTypeEnum.OMKREDS_PRIS, "F¾rdigramme", "navn", "pris",
+				"materiale", "farve", "id");
 		MaterialeType glasType = lavMaterialeType(MaterialeTypeEnum.AREAL_PRIS,
-				"Glas", new String[] { "navn", "pris" });
+				"Glas", "navn", "pris");
 		MaterialeType bagpapType = lavMaterialeType(
-				MaterialeTypeEnum.AREAL_PRIS, "Bagpap", new String[] { "navn",
-						"pris" });
+				MaterialeTypeEnum.AREAL_PRIS, "Bagpap", "navn", "pris");
 		MaterialeType baggrundType = lavMaterialeType(
-				MaterialeTypeEnum.AREAL_PRIS, "Baggrund", new String[] {
-						"navn", "pris" });
-		OpgaveType tilpassetIndramning = new OpgaveType("Tilpasset Indramning",
-				Arrays.asList(new IOpgaveAttributType[] { tilpasseligRammeType,
-						glasType, bagpapType, baggrundType }));
-		OpgaveType faerdigIndramning = new OpgaveType("F¾rdigindramning",
-				Arrays.asList(new IOpgaveAttributType[] { faerdigRammeType,
-						baggrundType }));
+				MaterialeTypeEnum.AREAL_PRIS, "Baggrund", "navn", "pris");
+		OpgaveType tilpassetIndramning = lavOpgaveType("Tilpasset Indramning",
+				tilpasseligRammeType, glasType, bagpapType, baggrundType);
+		OpgaveType faerdigIndramning = lavOpgaveType("F¾rdigindramning",
+				faerdigRammeType, baggrundType);
 		opgaveTyper = Arrays.asList(new OpgaveType[] { tilpassetIndramning,
 				faerdigIndramning });
 		defaultOpgaveType = tilpassetIndramning;
@@ -46,9 +41,16 @@ class MockKonfiguration implements ISessionKonfiguration {
 	}
 
 	private MaterialeType lavMaterialeType(MaterialeTypeEnum materialeTypeType,
-			String navn, String[] feltNavne) {
+			String navn, String... feltNavne) {
 		MaterialeType type = materialeTypeType.nyMaterialeType(navn);
 		type.setFeltNavne(Arrays.asList(feltNavne));
+		return type;
+	}
+
+	private OpgaveType lavOpgaveType(String navn,
+			IOpgaveAttributType... attributTyper) {
+		OpgaveType type = new OpgaveType("Tilpasset Indramning",
+				Arrays.asList(attributTyper));
 		return type;
 	}
 }
