@@ -1,25 +1,27 @@
 package stelling.model;
 
+import junit.framework.Assert;
+
+import org.junit.Test;
+
 public class OpgaveTypeTest {
 
-	// @Test - slået fra i øjeblikket
-	public void testTilpassetIndramning() {
-		Session session = new Session();
-
-//		// Her skal der så tilføjes nogle materialetyper til session-objektet
-//
-//		OpgaveType tilpassetIndramningType = new OpgaveType(
-//				"TilpassetIndramning");
-//		MaterialeType tilpassetRammeType = session
-//				.opgaveType("TilpassetRammeType");
-//		tilpassetIndramningType.tilfoejAttributType(tilpassetRammeType);
-//		MaterialeType glasType = session.opgaveType("GlasType");
-//		tilpassetIndramningType.tilfoejAttributType(glasType);
-//
-//		// Efter at alle attributtyper er specificeret kan man kreere en ny
-//		// opgave således
-//
-//		Opgave opgave = tilpassetIndramningType.nyOpgave();
-//		Beloeb pris = opgave.samletPris();
+	/**
+	 * Test at attributterne i en konkret opgave står i samme rækkefølge som
+	 * attributtyperne specificeredes i opgavetypen
+	 */
+	@Test
+	public void testAttributTypeOrdenBeholdes() {
+		String[] attributNavne = new String[] { "c", "a", "f", "g", "b", "e",
+				"d", "h" };
+		OpgaveType opgaveType = MockKonfiguration
+				.lavOpgaveTypeMedDummeAttributter("OpgaveTypeNavn",
+						attributNavne);
+		Assert.assertEquals(attributNavne.length, opgaveType.attributTyper()
+				.size());
+		for (int i = 0; i < attributNavne.length; i++) {
+			Assert.assertEquals(attributNavne[i], opgaveType.attributTyper()
+					.get(i).navn());
+		}
 	}
 }
