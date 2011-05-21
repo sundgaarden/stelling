@@ -13,6 +13,8 @@ public class Materiale implements IOpgaveAttribut {
 	private Beloeb pris;
 	private final Map<String, String> felter;
 
+	private static String DEFAULT_VAERDI = "Ingen";
+
 	/**
 	 * Kreerer en ny type materiale
 	 * 
@@ -59,7 +61,7 @@ public class Materiale implements IOpgaveAttribut {
 			return pris.toString();
 		}
 		String vaerdi = felter.get(feltNavn);
-		return vaerdi == null ? "" : vaerdi;
+		return vaerdi == null ? DEFAULT_VAERDI : vaerdi;
 	}
 
 	/**
