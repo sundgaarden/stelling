@@ -15,13 +15,13 @@ import java.util.Map;
  */
 public class OpgaveType {
 	private final String navn;
-	private final List<IOpgaveAttributType> attributTyper;
+	private final List<AttributType> attributTyper;
 
 	/**
 	 * En blank opgavetype helt uden attributtyper
 	 */
 	public static final OpgaveType BLANK = new OpgaveType("<BLANK>",
-			new ArrayList<IOpgaveAttributType>());
+			new ArrayList<AttributType>());
 
 	/**
 	 * Kreerer en ny opgavetype med det specificerede navn og s¾t af
@@ -32,9 +32,9 @@ public class OpgaveType {
 	 * @param inAttributTyper
 	 *            Attributtyper i den nye opgvetype
 	 */
-	public OpgaveType(String inNavn, List<IOpgaveAttributType> inAttributTyper) {
+	public OpgaveType(String inNavn, List<AttributType> inAttributTyper) {
 		navn = inNavn;
-		attributTyper = new ArrayList<IOpgaveAttributType>(inAttributTyper);
+		attributTyper = new ArrayList<AttributType>(inAttributTyper);
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class OpgaveType {
 	 * 
 	 * @return Attributtyper i denne opgavetype
 	 */
-	public List<IOpgaveAttributType> attributTyper() {
+	public List<AttributType> attributTyper() {
 		return Collections.unmodifiableList(attributTyper);
 	}
 
@@ -71,10 +71,10 @@ public class OpgaveType {
 	 * 
 	 * @return Map over attributtypernes defaultv¾rdier
 	 */
-	Map<IOpgaveAttributType, IOpgaveAttribut> defaultAttributter() {
-		Map<IOpgaveAttributType, IOpgaveAttribut> map = new HashMap<IOpgaveAttributType, IOpgaveAttribut>();
-		for (IOpgaveAttributType attributType : attributTyper) {
-			map.put(attributType, attributType.defaultVaerdi());
+	Map<AttributType, Attribut> defaultAttributter() {
+		Map<AttributType, Attribut> map = new HashMap<AttributType, Attribut>();
+		for (AttributType attributType : attributTyper) {
+			map.put(attributType, attributType.nyAttribut());
 		}
 		return map;
 	}

@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class Opgave implements IBeskrivelig {
 	private final OpgaveType opgaveType;
-	private final Map<IOpgaveAttributType, IOpgaveAttribut> attributter;
+	private final Map<AttributType, Attribut> attributter;
 	private LaengdeMaal hoejde;
 	private LaengdeMaal bredde;
 
@@ -64,7 +64,7 @@ public class Opgave implements IBeskrivelig {
 	 */
 	public Beloeb samletPris() {
 		Beloeb sum = Beloeb.NUL;
-		for (IOpgaveAttribut att : attributter.values()) {
+		for (Attribut att : attributter.values()) {
 			sum = sum.adder(att.pris(hoejde, bredde));
 		}
 		return sum;
@@ -82,7 +82,7 @@ public class Opgave implements IBeskrivelig {
 		builder.append(linjePrefix + "\t").append("MŒl (B x H): ")
 				.append(bredde).append(" x ").append(hoejde).append("\n");
 		builder.append(linjePrefix + "\t").append("Attributter:\n");
-		for (IOpgaveAttribut att : attributter.values()) {
+		for (Attribut att : attributter.values()) {
 			builder.append(linjePrefix + "\t\t").append(beskrivAttribut(att))
 					.append("\n");
 		}
@@ -92,7 +92,7 @@ public class Opgave implements IBeskrivelig {
 	}
 
 	// TODO: F¿les ikke helt som det rigtige sted til metoden beskrivAttribut
-	private String beskrivAttribut(IOpgaveAttribut attribut) {
+	private String beskrivAttribut(Attribut attribut) {
 		StringBuilder builder = new StringBuilder();
 		builder.append(attribut.attributType().navn()).append(": ");
 		for (String feltNavn : attribut.attributType().feltNavne()) {
