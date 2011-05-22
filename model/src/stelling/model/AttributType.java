@@ -9,10 +9,8 @@ import java.util.List;
  * indramningsopgaver
  * <p>
  * En attributtype har et sæt feltnavne, som kan bruges til at læse værdier fra
- * konkrete attributter af den pågældende type
- * <p>
- * Der er visse faste felter, som en attributtype altid implicit specificerer,
- * f.eks. 'navn' og 'pris'
+ * konkrete attributter af den pågældende type. Alle attributter har feltet
+ * 'navn'
  */
 
 public abstract class AttributType {
@@ -42,7 +40,12 @@ public abstract class AttributType {
 	public AttributType(String inNavn, List<String> inFeltNavne) {
 		navn = inNavn;
 		feltNavne = new ArrayList<String>(inFeltNavne);
-		nil = new Attribut(this, "Ingen", Beloeb.NUL);
+		nil = new Attribut(this, "Ingen") {
+			@Override
+			public Beloeb pris(LaengdeMaal hoejde, LaengdeMaal bredde) {
+				return Beloeb.NUL;
+			}
+		};
 	}
 
 	/**
@@ -79,22 +82,4 @@ public abstract class AttributType {
 	 * @return Attribut af denne attributtype
 	 */
 	public abstract Attribut nyAttribut();
-
-	/**
-	 * Beregner en pris ud fra de angivne oplysninger
-	 * <p>
-	 * Udregningen foretages forskelligt af forskellige attributtyper og kan
-	 * derfor udvise forskellig sammenhæng mellem størrelse og pris (f.eks.
-	 * omkreds eller areal)
-	 * 
-	 * @param hoejde
-	 *            Opgavens højde
-	 * @param bredde
-	 *            Opgavens bredde
-	 * @param pris
-	 *            Attributtens basispris
-	 * @return Pris for attributten i den angivne størrelse
-	 */
-	public abstract Beloeb beregnPris(LaengdeMaal hoejde, LaengdeMaal bredde,
-			Beloeb pris);
 }

@@ -1,9 +1,36 @@
 package stelling.model;
 
-public class SammensatAttributType extends AttributType {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-	public SammensatAttributType(String inNavn) {
+/**
+ * Repræsenterer en type attribut, som er sammensat af underattributter
+ */
+public class SammensatAttributType extends AttributType {
+	private final List<AttributType> underAttributTyper;
+
+	/**
+	 * Kreerer en ny sammensat attributtype
+	 * 
+	 * @param inNavn
+	 *            Navn på den nye attributtype
+	 * @param inUnderAttributTyper
+	 *            Underattributtyper for den nye sammensatte attributtype
+	 */
+	public SammensatAttributType(String inNavn,
+			List<AttributType> inUnderAttributTyper) {
 		super(inNavn);
+		underAttributTyper = new ArrayList<AttributType>(inUnderAttributTyper);
+	}
+
+	/**
+	 * Returnerer denne attributtypes underattributtyper
+	 * 
+	 * @return Underattributtyper
+	 */
+	public List<AttributType> underAttributTyper() {
+		return Collections.unmodifiableList(underAttributTyper);
 	}
 
 	@Override
@@ -11,12 +38,4 @@ public class SammensatAttributType extends AttributType {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public Beloeb beregnPris(LaengdeMaal hoejde, LaengdeMaal bredde, Beloeb pris) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 }

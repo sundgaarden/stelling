@@ -36,6 +36,15 @@ public class ValgAttributType extends AttributType {
 	}
 
 	/**
+	 * Returnerer attributberegneren associeret med denne attributtype
+	 * 
+	 * @return Attributberegner associeret med denne attributtype
+	 */
+	AttributBeregner beregner() {
+		return beregner;
+	}
+
+	/**
 	 * Returnerer s¾ttet af attributv¾rdier, som attributter af denne type kan
 	 * antage
 	 * 
@@ -87,10 +96,4 @@ public class ValgAttributType extends AttributType {
 		}
 		defaultAttribut = attribut;
 	}
-
-	@Override
-	public Beloeb beregnPris(LaengdeMaal hoejde, LaengdeMaal bredde, Beloeb pris) {
-		return beregner.beregnPris(hoejde, bredde, pris);
-	}
-
 }

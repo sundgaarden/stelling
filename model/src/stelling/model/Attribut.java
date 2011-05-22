@@ -7,10 +7,9 @@ import java.util.Map;
  * Repræsenterer en konkret attributværdi ved en specifik opgave, f.eks.
  * 'museumsglas' ved en indramningsopgave
  */
-public class Attribut {
+public abstract class Attribut {
 	private final AttributType type;
 	private String navn;
-	private Beloeb pris;
 	private final Map<String, String> felter;
 
 	private static String DEFAULT_FELT_VAERDI = "Ingen";
@@ -21,18 +20,15 @@ public class Attribut {
 	 * @param inType
 	 *            Type af den nye attribut
 	 */
-	public Attribut(AttributType inType, String inNavn, Beloeb inPris) {
+	Attribut(AttributType inType, String inNavn) {
 		type = inType;
 		navn = inNavn;
-		pris = inPris;
 		felter = new HashMap<String, String>();
 	}
 
 	/**
 	 * Returnerer prisen for den pågældende attribut iht. den specificerede
-	 * størrelse. Udregningen foretages iht. attributtypen og kan derfor udvise
-	 * forskellig sammenhæng mellem størrelse og pris (f.eks. omkreds eller
-	 * areal)
+	 * størrelse. Udregningen foretages forskelligt af forskellige attributtyper
 	 * 
 	 * @param hoejde
 	 *            Højden på opgaven
@@ -40,9 +36,7 @@ public class Attribut {
 	 *            Bredden på opgaven
 	 * @return Pris for denne attribut givet de specificerede mål
 	 */
-	public Beloeb pris(LaengdeMaal hoejde, LaengdeMaal bredde) {
-		return type.beregnPris(hoejde, bredde, pris);
-	}
+	public abstract Beloeb pris(LaengdeMaal hoejde, LaengdeMaal bredde);
 
 	/**
 	 * Returnerer typen af denne attribut
@@ -73,9 +67,6 @@ public class Attribut {
 		if ("navn".equalsIgnoreCase(feltNavn)) {
 			return navn;
 		}
-		if ("pris".equalsIgnoreCase(feltNavn)) {
-			return pris.toString();
-		}
 		String vaerdi = felter.get(feltNavn);
 		return vaerdi == null ? DEFAULT_FELT_VAERDI : vaerdi;
 	}
@@ -91,9 +82,6 @@ public class Attribut {
 	public void setFeltVaerdi(String feltNavn, String feltVaerdi) {
 		if ("navn".equalsIgnoreCase(feltNavn)) {
 			navn = feltVaerdi;
-		}
-		if ("pris".equalsIgnoreCase(feltNavn)) {
-			pris = Beloeb.parse(feltVaerdi);
 		}
 		if (!type.feltNavne().contains(feltNavn)) {
 			throw new IllegalArgumentException("Det specificerede feltnavn: '"
