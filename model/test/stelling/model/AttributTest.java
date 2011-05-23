@@ -8,6 +8,9 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+/**
+ * Test cases der dækker attribut-klasserne
+ */
 public class AttributTest {
 
 	private static final List<String> FELT_NAVNE = cut(" Navn Id Pris Farve Materiale Placering");
@@ -15,6 +18,9 @@ public class AttributTest {
 	private static final List<String> BLAA_RAMME = cut("|Blå Træramme|0001|480.00|Blå|Træ|Sydvest");
 	private static final List<String> HVID_RAMME = cut("|Hvid Træramme|0001|480.00|Hvid|Træ|Syd");
 	private static final List<String> KLAR_RAMME = cut("|Klar Træramme|0001|450.00|Klar|Træ|Sydøst");
+
+	private static final LaengdeMaal HOEJDE = new LaengdeMaal(300);
+	private static final LaengdeMaal BREDDE = new LaengdeMaal(200);
 
 	@Test
 	public void testValgAttribut() {
@@ -27,13 +33,27 @@ public class AttributTest {
 		Assert.assertEquals(type.nil(), type.nyAttribut());
 		type.setDefaultVaerdi(klar);
 		Assert.assertEquals(klar, type.nyAttribut());
-		LaengdeMaal hoejde = new LaengdeMaal(300);
-		LaengdeMaal bredde = new LaengdeMaal(200);
-		Assert.assertEquals(0.0, type.nil().pris(hoejde, bredde).vaerdi());
-		Assert.assertEquals(500.0, sort.pris(hoejde, bredde).vaerdi());
-		Assert.assertEquals(480.0, blaa.pris(hoejde, bredde).vaerdi());
-		Assert.assertEquals(480.0, hvid.pris(hoejde, bredde).vaerdi());
-		Assert.assertEquals(450.0, klar.pris(hoejde, bredde).vaerdi());
+		Assert.assertEquals(0.0, type.nil().pris(HOEJDE, BREDDE).vaerdi());
+		Assert.assertEquals(500.0, sort.pris(HOEJDE, BREDDE).vaerdi());
+		Assert.assertEquals(480.0, blaa.pris(HOEJDE, BREDDE).vaerdi());
+		Assert.assertEquals(480.0, hvid.pris(HOEJDE, BREDDE).vaerdi());
+		Assert.assertEquals(450.0, klar.pris(HOEJDE, BREDDE).vaerdi());
+	}
+
+	@Test
+	public void testAntalAttribut() {
+		AntalAttributType type = new AntalAttributType("Breddestivere",
+				new Beloeb(25));
+		AntalAttribut antal = (AntalAttribut) type.nyAttribut();
+		Assert.assertEquals(0.0, antal.pris(HOEJDE, BREDDE).vaerdi());
+		antal.setAntal(1);
+		Assert.assertEquals(25.0, antal.pris(HOEJDE, BREDDE).vaerdi());
+		antal.setAntal(2);
+		Assert.assertEquals(50.0, antal.pris(HOEJDE, BREDDE).vaerdi());
+		antal.setAntal(5);
+		Assert.assertEquals(125.0, antal.pris(HOEJDE, BREDDE).vaerdi());
+		Assert.assertEquals(125.0, antal.pris(LaengdeMaal.NUL, LaengdeMaal.NUL)
+				.vaerdi());
 	}
 
 	@Test
