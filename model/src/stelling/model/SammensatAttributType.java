@@ -35,7 +35,6 @@ public class SammensatAttributType extends AttributType {
 
 	@Override
 	public Attribut nyAttribut() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SammensatAttribut(this, navn());
 	}
 }

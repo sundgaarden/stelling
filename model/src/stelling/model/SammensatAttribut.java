@@ -45,7 +45,11 @@ public class SammensatAttribut extends Attribut {
 	public Attribut underAttribut(AttributType attributType) {
 		checkUnderAttributType(attributType);
 		Attribut attribut = underAttributter.get(attributType);
-		return attribut == null ? attributType.nyAttribut() : attribut;
+		if (attribut == null) {
+			attribut = attributType.nyAttribut();
+			underAttributter.put(attributType, attribut);
+		}
+		return attribut;
 	}
 
 	/**
@@ -54,7 +58,7 @@ public class SammensatAttribut extends Attribut {
 	 * @param attribut
 	 *            Attribut der skal ¾ndres
 	 */
-	public void underAttribut(Attribut attribut) {
+	public void setUnderAttribut(Attribut attribut) {
 		checkUnderAttributType(attribut.attributType());
 		underAttributter.put(attribut.attributType(), attribut);
 	}
