@@ -41,7 +41,21 @@ public class Beloeb {
 	 * @return Multipliceret bel¿b
 	 */
 	public Beloeb multiplicer(double faktor) {
-		return new Beloeb(faktor * vaerdi);
+		double ny = faktor * vaerdi;
+		return ny == 0 ? NUL : new Beloeb(ny);
+	}
+
+	/**
+	 * Returnerer en ny instans af Beloeb som er dette bel¿b divideret med den
+	 * angivne divisor
+	 * 
+	 * @param divisor
+	 *            Faktoren der skal multipliceres med
+	 * @return Divideret bel¿b
+	 */
+	public Beloeb divider(double divisor) {
+		double ny = vaerdi / divisor;
+		return ny == 0 ? NUL : new Beloeb(ny);
 	}
 
 	/**
@@ -54,7 +68,17 @@ public class Beloeb {
 	 * @return Sum af de to bel¿b
 	 */
 	public Beloeb adder(Beloeb beloeb) {
-		return new Beloeb(vaerdi + beloeb.vaerdi());
+		double ny = vaerdi + beloeb.vaerdi();
+		return ny == 0 ? NUL : new Beloeb(ny);
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (!(other instanceof Beloeb)) {
+			return false;
+		}
+		Beloeb beloeb = (Beloeb) other;
+		return vaerdi == beloeb.vaerdi;
 	}
 
 	@Override

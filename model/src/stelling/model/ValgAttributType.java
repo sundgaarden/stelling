@@ -105,7 +105,7 @@ public class ValgAttributType extends AttributType {
 	 * @param felter
 	 *            Feltv¾rdier for den nye attribut
 	 */
-	public void tilfoejAttribut(List<String> felter) {
+	public ValgAttribut tilfoejAttribut(List<String> felter) {
 		String navn = findFelt(NAVN_FELT, felter);
 		Beloeb basisPris = Beloeb.parse(findFelt(BASIS_PRIS_FELT, felter));
 		ValgAttribut attribut = new ValgAttribut(this, navn, basisPris);
@@ -119,6 +119,7 @@ public class ValgAttributType extends AttributType {
 			attribut.setFeltVaerdi(feltNavne.get(i), felter.get(i));
 		}
 		tilfoejAttribut(attribut);
+		return attribut;
 	}
 
 	private String findFelt(String feltNavn, List<String> felter) {

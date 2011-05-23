@@ -12,20 +12,20 @@ public enum AttributBeregner {
 		@Override
 		public Beloeb beregnPris(LaengdeMaal hoejde, LaengdeMaal bredde,
 				Beloeb basisPris) {
-			// kvmFaktor konverterer fra kvadratmillimeter til kvadratmeter
-			double kvmFaktor = 1.0 / 1e6;
-			return basisPris.multiplicer(kvmFaktor * hoejde.vaerdi()
-					* bredde.vaerdi());
+			// kvmDivisor konverterer fra kvadratmillimeter til kvadratmeter
+			double kvmDivisor = 1e6;
+			double areal = hoejde.vaerdi() * bredde.vaerdi();
+			return basisPris.multiplicer(areal).divider(kvmDivisor);
 		}
 	},
 	OMKREDS_PRIS {
 		@Override
 		public Beloeb beregnPris(LaengdeMaal hoejde, LaengdeMaal bredde,
 				Beloeb basisPris) {
-			// meterFaktor konverterer fra millimeter til meter
-			double meterFaktor = 1.0 / 1e3;
-			double omkreds = 2 * hoejde.vaerdi() + bredde.vaerdi();
-			return basisPris.multiplicer(meterFaktor * omkreds);
+			// meterDivisor konverterer fra millimeter til meter
+			double meterDivisor = 1e3;
+			double omkreds = 2 * (hoejde.vaerdi() + bredde.vaerdi());
+			return basisPris.multiplicer(omkreds).divider(meterDivisor);
 		}
 	},
 	FAST_PRIS {
