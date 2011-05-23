@@ -8,7 +8,7 @@ package stelling.model;
  * omkreds eller areal)
  */
 public enum AttributBeregner {
-	AREAL_PRIS {
+	AREAL {
 		@Override
 		public Beloeb beregnPris(LaengdeMaal hoejde, LaengdeMaal bredde,
 				Beloeb basisPris) {
@@ -18,7 +18,7 @@ public enum AttributBeregner {
 			return basisPris.multiplicer(areal).divider(kvmDivisor);
 		}
 	},
-	OMKREDS_PRIS {
+	OMKREDS {
 		@Override
 		public Beloeb beregnPris(LaengdeMaal hoejde, LaengdeMaal bredde,
 				Beloeb basisPris) {
@@ -28,7 +28,7 @@ public enum AttributBeregner {
 			return basisPris.multiplicer(omkreds).divider(meterDivisor);
 		}
 	},
-	FAST_PRIS {
+	FAST {
 		@Override
 		public Beloeb beregnPris(LaengdeMaal hoejde, LaengdeMaal bredde,
 				Beloeb basisPris) {

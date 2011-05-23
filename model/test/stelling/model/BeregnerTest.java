@@ -20,17 +20,17 @@ public class BeregnerTest {
 			double forventetFastPris) {
 		Assert.assertEquals(
 				forventetArealPris,
-				AttributBeregner.AREAL_PRIS.beregnPris(new LaengdeMaal(hoejde),
+				AttributBeregner.AREAL.beregnPris(new LaengdeMaal(hoejde),
 						new LaengdeMaal(bredde), new Beloeb(basisPris))
 						.vaerdi());
 		Assert.assertEquals(
 				forventetOmkredsPris,
-				AttributBeregner.OMKREDS_PRIS.beregnPris(
+				AttributBeregner.OMKREDS.beregnPris(
 						new LaengdeMaal(hoejde), new LaengdeMaal(bredde),
 						new Beloeb(basisPris)).vaerdi());
 		Assert.assertEquals(
 				forventetFastPris,
-				AttributBeregner.FAST_PRIS.beregnPris(new LaengdeMaal(hoejde),
+				AttributBeregner.FAST.beregnPris(new LaengdeMaal(hoejde),
 						new LaengdeMaal(bredde), new Beloeb(basisPris))
 						.vaerdi());
 	}

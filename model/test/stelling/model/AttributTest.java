@@ -25,7 +25,7 @@ public class AttributTest {
 	@Test
 	public void testValgAttribut() {
 		ValgAttributType type = new ValgAttributType("Tilpasselig Ramme",
-				FELT_NAVNE, AttributBeregner.OMKREDS_PRIS);
+				FELT_NAVNE, AttributBeregner.OMKREDS);
 		ValgAttribut sort = type.tilfoejAttribut(SORT_RAMME);
 		ValgAttribut blaa = type.tilfoejAttribut(BLAA_RAMME);
 		ValgAttribut hvid = type.tilfoejAttribut(HVID_RAMME);
