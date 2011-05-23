@@ -82,23 +82,24 @@ public class Opgave implements IBeskrivelig {
 		builder.append(linjePrefix + "\t").append("Mål (B x H): ")
 				.append(bredde).append(" x ").append(hoejde).append("\n");
 		builder.append(linjePrefix + "\t").append("Attributter:\n");
-		for (Attribut att : attributter.values()) {
-			builder.append(linjePrefix + "\t\t").append(beskrivAttribut(att))
-					.append("\n");
-		}
+// TODO: Implementer IBeskrivelig på attributtyperne
+//		for (Attribut att : attributter.values()) {
+//			builder.append(linjePrefix + "\t\t").append(beskrivAttribut(att))
+//					.append("\n");
+//		}
 		builder.append(linjePrefix + "\t").append("Pris: ")
 				.append(samletPris().toString()).append("\n");
 		return builder.toString();
 	}
 
-	// TODO: Føles ikke helt som det rigtige sted til metoden beskrivAttribut
-	private String beskrivAttribut(Attribut attribut) {
-		StringBuilder builder = new StringBuilder();
-		builder.append(attribut.attributType().navn()).append(": ");
-		for (String feltNavn : attribut.attributType().feltNavne()) {
-			builder.append(feltNavn).append(" = ");
-			builder.append(attribut.feltVaerdi(feltNavn)).append(", ");
-		}
-		return builder.substring(0, builder.length() - 2);
-	}
+//	// TODO: Føles ikke helt som det rigtige sted til metoden beskrivAttribut
+//	private String beskrivAttribut(Attribut attribut) {
+//		StringBuilder builder = new StringBuilder();
+//		builder.append(attribut.attributType().navn()).append(": ");
+//		for (String feltNavn : attribut.attributType().feltNavne()) {
+//			builder.append(feltNavn).append(" = ");
+//			builder.append(attribut.feltVaerdi(feltNavn)).append(", ");
+//		}
+//		return builder.substring(0, builder.length() - 2);
+//	}
 }

@@ -60,7 +60,8 @@ class MockKonfiguration implements ISessionKonfiguration {
 		List<AttributType> attributTyper = new ArrayList<AttributType>();
 		for (final String attributNavn : attributTypeNavne) {
 			AttributType type = new ValgAttributType(attributNavn,
-					Arrays.asList(new String[] {}), AttributBeregner.FAST_PRIS);
+					Arrays.asList(new String[] { "navn", "pris" }),
+					AttributBeregner.FAST_PRIS);
 			attributTyper.add(type);
 		}
 		return new OpgaveType(opgaveTypeNavn, attributTyper);

@@ -11,11 +11,18 @@ import java.util.List;
  * De mulige værdier kan naturligvis konfigureres gennem
  * konfigurationsklasserne, men systemet kreerer ikke nye værdier af en sådan
  * attributtype under kørsel
+ * <p>
+ * Denne attributtype har et sæt feltnavne, som kan bruges til at læse værdier
+ * fra konkrete attributter af den pågældende type
  */
 public class ValgAttributType extends AttributType {
+	private final List<String> feltNavne;
 	private final List<Attribut> attributter;
 	private final AttributBeregner beregner;
 	private Attribut defaultAttribut;
+
+	static String NAVN_FELT = "navn";
+	static String BASIS_PRIS_FELT = "pris";
 
 	/**
 	 * Kreerer en ny valg-attributtype med de specificerede karakteristika
@@ -29,10 +36,35 @@ public class ValgAttributType extends AttributType {
 	 */
 	public ValgAttributType(String inNavn, List<String> inFeltNavne,
 			AttributBeregner inBeregner) {
-		super(inNavn, inFeltNavne);
+		super(inNavn);
+		feltNavne = checkFeltNavne(inFeltNavne);
 		attributter = new ArrayList<Attribut>();
 		defaultAttribut = nil();
 		beregner = inBeregner;
+	}
+
+	/**
+	 * Checker at de specificerede feltnavne indeholder både 'navn' og 'pris'
+	 */
+	private static List<String> checkFeltNavne(List<String> feltNavne) {
+		boolean harNavn = false;
+		boolean harBasisPris = false;
+		for (String feltNavn : feltNavne) {
+			if (NAVN_FELT.equalsIgnoreCase(feltNavn)) {
+				harNavn = true;
+				continue;
+			}
+			if (BASIS_PRIS_FELT.equalsIgnoreCase(feltNavn)) {
+				harBasisPris = true;
+				continue;
+			}
+		}
+		if (harNavn && harBasisPris) {
+			return feltNavne;
+		}
+		throw new IllegalArgumentException("En ValgAttribut skal have"
+				+ " både feltet '" + NAVN_FELT + "' og feltet '"
+				+ BASIS_PRIS_FELT + "'");
 	}
 
 	/**
@@ -42,6 +74,16 @@ public class ValgAttributType extends AttributType {
 	 */
 	AttributBeregner beregner() {
 		return beregner;
+	}
+
+	/**
+	 * Returnerer navnene på de felter som denne attributtype har, f.eks.
+	 * {'navn', 'pris', 'materiale', 'id'}
+	 * 
+	 * @return Navne på felter i denne attributtype
+	 */
+	public List<String> feltNavne() {
+		return Collections.unmodifiableList(feltNavne);
 	}
 
 	/**
@@ -55,26 +97,56 @@ public class ValgAttributType extends AttributType {
 	}
 
 	/**
-	 * Ændrer sættet af attributværdier, som attributter af denne type kan
-	 * antage
+	 * Tilføjer en ny attribut til attributtypen
+	 * <p>
+	 * Det angivne felter skal specificeres i samme rækkefølge som feltnavne
+	 * blev specificeret
 	 * 
-	 * @param inAttributter
-	 *            Nyt sæt af attributværdier
+	 * @param felter
+	 *            Feltværdier for den nye attribut
 	 */
-	public void setAttributter(List<Attribut> inAttributter) {
-		attributter.clear();
-		attributter.add(nil());
-		for (Attribut attribut : inAttributter) {
-			if (attributter.contains(attribut)) {
-				throw new IllegalArgumentException(
-						"Attributten findes allerede: " + attribut.navn());
+	public void tilfoejAttribut(List<String> felter) {
+		String navn = findFelt(NAVN_FELT, felter);
+		Beloeb basisPris = Beloeb.parse(findFelt(BASIS_PRIS_FELT, felter));
+		ValgAttribut attribut = new ValgAttribut(this, navn, basisPris);
+		for (int i = 0; i < feltNavne.size(); i++) {
+			if (feltNavne.get(i).equalsIgnoreCase(NAVN_FELT)) {
+				continue;
 			}
-			if (attribut.attributType() != this) {
-				throw new IllegalArgumentException("Attributten: "
-						+ attribut.navn() + " er ikke af denne type: " + navn());
+			if (feltNavne.get(i).equalsIgnoreCase(BASIS_PRIS_FELT)) {
+				continue;
 			}
-			attributter.add(attribut);
+			attribut.setFeltVaerdi(feltNavne.get(i), felter.get(i));
 		}
+		tilfoejAttribut(attribut);
+	}
+
+	private String findFelt(String feltNavn, List<String> felter) {
+		for (int i = 0; i < feltNavne.size(); i++) {
+			if (feltNavn.equalsIgnoreCase(feltNavne.get(i))) {
+				return felter.get(i);
+			}
+		}
+		throw new IllegalArgumentException("Feltet blev ikke fundet: "
+				+ feltNavn);
+	}
+
+	/**
+	 * Tilføjer den specificerede attribut til attributtypen
+	 * 
+	 * @param attribut
+	 *            Den nye attribut
+	 */
+	public void tilfoejAttribut(ValgAttribut attribut) {
+		if (attributter.contains(attribut)) {
+			throw new IllegalArgumentException("Attributten findes allerede: "
+					+ attribut.navn());
+		}
+		if (attribut.attributType() != this) {
+			throw new IllegalArgumentException("Attributten: "
+					+ attribut.navn() + " er ikke af denne type: " + navn());
+		}
+		attributter.add(attribut);
 	}
 
 	@Override
