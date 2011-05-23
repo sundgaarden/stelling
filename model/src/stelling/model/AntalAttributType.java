@@ -22,6 +22,6 @@ public class AntalAttributType extends AttributType {
 
 	@Override
 	public Attribut nyAttribut() {
-		return new AntalAttribut(this, navn(), prisPerStyk);
+		return new AntalAttribut(this, prisPerStyk);
 	}
 }

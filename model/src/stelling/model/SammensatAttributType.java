@@ -35,6 +35,6 @@ public class SammensatAttributType extends AttributType {
 
 	@Override
 	public Attribut nyAttribut() {
-		return new SammensatAttribut(this, navn());
+		return new SammensatAttribut(this);
 	}
 }

@@ -18,8 +18,8 @@ public class AntalAttribut extends Attribut {
 	 * @param inPrisPerStyk
 	 *            Stykprisen for den ny attribut
 	 */
-	AntalAttribut(AntalAttributType inType, String inNavn, Beloeb inPrisPerStyk) {
-		super(inType, inNavn);
+	AntalAttribut(AntalAttributType inType, Beloeb inPrisPerStyk) {
+		super(inType);
 		prisPerStyk = inPrisPerStyk;
 		antal = 0;
 	}

@@ -20,8 +20,8 @@ public class SammensatAttribut extends Attribut {
 	 * @param inNavn
 	 *            Navn på den nye attribut
 	 */
-	SammensatAttribut(SammensatAttributType inType, String inNavn) {
-		super(inType, inNavn);
+	SammensatAttribut(SammensatAttributType inType) {
+		super(inType);
 		type = inType;
 		underAttributter = new HashMap<AttributType, Attribut>();
 	}

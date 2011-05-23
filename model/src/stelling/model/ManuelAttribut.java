@@ -15,8 +15,8 @@ public class ManuelAttribut extends Attribut {
 	 * @param inNavn
 	 *            Navnet på den nye attribut
 	 */
-	ManuelAttribut(ManuelAttributType inType, String inNavn) {
-		super(inType, inNavn);
+	ManuelAttribut(ManuelAttributType inType) {
+		super(inType);
 		pris = Beloeb.NUL;
 	}
 

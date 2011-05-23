@@ -19,6 +19,6 @@ public class ManuelAttributType extends AttributType {
 
 	@Override
 	public Attribut nyAttribut() {
-		return new ManuelAttribut(this, navn());
+		return new ManuelAttribut(this);
 	}
 }

@@ -9,14 +9,27 @@ public abstract class Attribut {
 	private final String navn;
 
 	/**
-	 * Kreerer en ny attribut med den specificerede type
+	 * Kreerer en ny attribut med den specificerede type og navn
 	 * 
 	 * @param inType
-	 *            Type af den nye attribut
+	 *            Type af denne attribut
+	 * @param inNavn
+	 *            Navn på denne attribut
 	 */
 	Attribut(AttributType inType, String inNavn) {
 		type = inType;
 		navn = inNavn;
+	}
+
+	/**
+	 * Kreerer en ny attribut med den specificerede type. Som navn bruges navnet
+	 * på attributtypen
+	 * 
+	 * @param inType
+	 *            Type af denne attribut
+	 */
+	Attribut(AttributType inType) {
+		this(inType, inType.navn());
 	}
 
 	/**
