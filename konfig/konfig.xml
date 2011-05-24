@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<konfig>
+
+		<AttributTypeValg type="Glas">
+				<beregner>Areal</beregner>
+				<placering>NORD</placering>
+				<felter>
+				<navn></navn>
+				<pris></pris>
+				</felter>
+				<attributter>
+				<feltnavn>Museumsglas</feltnavn>
+				<feltpris>210</feltpris>
+				</attributter>
+		</AttributTypeValg>
+		
+		<AttributTypeValg type="Glas">
+				<beregner>Areal</beregner>
+				<placering>NORD</placering>
+				<felter>
+				<navn></navn>
+				<pris></pris>
+				</felter>
+				<attributter>
+				<feltnavn>Standardglas</feltnavn>
+				<feltpris>50</feltpris>
+				</attributter>
+		</AttributTypeValg>
+		
+		<AttributTypeValg type="Glas">
+				<beregner>Areal</beregner>
+				<placering>NORD</placering>
+				<felter>
+				<navn></navn>
+				<pris></pris>
+				</felter>
+				<attributter>
+				<feltnavn>Plexiglas</feltnavn>
+				<feltpris>100</feltpris>
+				</attributter>
+		</AttributTypeValg>
+</konfig>
