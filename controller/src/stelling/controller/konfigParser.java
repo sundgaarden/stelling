@@ -89,21 +89,20 @@ private void parseDokumentet(){
 			//hent attributTypeValg objektet
 			ValgAttributType a = getAttributTypeValg(el);
 			
-			//add til liste
-			myAtt.add(a);
+			
 		}
 	}
 }
 
-private ValgAttributType getAttributTypeValg(Element empEl){
+private ValgAttributType getAttributTypeValg(Element El){
 
 	//for hver <attributTypeValg> element hent text og int værdier
 	
-	String navn = getTextValue(empEl, "type");
-	String beregner = getTextValue(empEl, "beregner");
-	String placering = getTextValue(empEl, "placering");
-	String feltnavn = getTextValue(empEl, "feltnavn");
-	String feltpris = getTextValue(empEl, "feltpris");
+	String navn = getTextValue(El, "type");
+	String beregner = getTextValue(El, "beregner");
+	String placering = getTextValue(El, "placering");
+	String feltnavn = getTextValue(El, "feltnavn");
+	String feltpris = getTextValue(El, "feltpris");
 	
 	feltNavne.add("navn");
 	feltNavne.add("pris");
@@ -111,7 +110,7 @@ private ValgAttributType getAttributTypeValg(Element empEl){
 	attributter.add(feltpris);
 	
 	//ValgAttributType va = new ValgAttributType(navn, feltNavne, beregner);
-	
+	return va;
 }
 
 private String getTextValue(Element ele, String tagNavn) {
