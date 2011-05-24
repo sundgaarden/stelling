@@ -6,22 +6,18 @@ import stelling.model.*;
 public class Konfiguration {
 
 	private Collection<OpgaveType> opgaveTyper;
-	private Collection<MaterialeType> materialeTyper;
 	private OpgaveType defaultOpgave;
 
 /**
  * Konstruerer en ny konfiguration
  * 
  * @param	opgaveTyper		en liste af de opgavetyper i konfigurationen
- * @param	materialeTyper	en liste af de materialetyper i konfigurationen
+ * @param	defaultOpgave   konfigurationens default opgave
  */
 
-	public Konfiguration(Collection<OpgaveType> opgaveTyper,
-			Collection<MaterialeType> materialeTyper,
-			OpgaveType defaultOpgave)
+	public Konfiguration(Collection<OpgaveType> opgaveTyper, OpgaveType defaultOpgave)
 	{
 		this.opgaveTyper = opgaveTyper;
-		this.materialeTyper = materialeTyper;
 		this.defaultOpgave = defaultOpgave;
 	}
 
@@ -36,16 +32,6 @@ public class Konfiguration {
 	return opgaveTyper;
 }
 
-/**
- * Henter listen af materialetyper fra konfigurationen
- * 
- * @return liste af materialetyper
- */
-
-	public Collection<MaterialeType> getMaterialeTyper()
-{
-	return materialeTyper;
-}
 
 /**
  * Angiver hvilken opgave der at sat som default i konfigurationen
